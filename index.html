@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdallah Badran | ItzBadran - Content Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: white;
+            animation: welcomeFloat 2s ease-in-out;
+        }
+
+        .welcome-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 3s ease-in-out infinite;
+        }
+
+        .welcome-content p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        @keyframes welcomeFloat {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideInDown 1s ease-out;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: profileFloat 3s ease-in-out infinite;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: profileGlow 4s linear infinite;
+        }
+
+        @keyframes profileFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes profileGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile h1 {
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideInDown {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Links Section */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .link-item:hover::before {
+            left: 100%;
+        }
+
+        .link-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .link-item:active {
+            transform: translateY(-4px) scale(0.98);
+        }
+
+        .link-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            animation: iconFloat 2s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        .link-text {
+            flex: 1;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Platform-specific colors */
+        .youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        .instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+        .tiktok { background: linear-gradient(135deg, #000000, #ff0050); }
+        .twitch { background: linear-gradient(135deg, #9146ff, #6441a4); }
+        .email { background: linear-gradient(135deg, #4285f4, #34a853); }
+        .paypal { background: linear-gradient(135deg, #003087, #009cde); }
+        .twitter { background: linear-gradient(135deg, #1da1f2, #0d8bd9); }
+        .snapchat { background: linear-gradient(135deg, #fffc00, #fff700); }
+        .facebook { background: linear-gradient(135deg, #1877f2, #166fe5); }
+        .threads { background: linear-gradient(135deg, #000000, #333333); }
+        .g2a { background: linear-gradient(135deg, #ff6a00, #ee5a00); }
+        .redz { background: linear-gradient(135deg, #ff4444, #cc0000); }
+        .baaz { background: linear-gradient(135deg, #00c851, #007e33); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .welcome-content h1 {
+                font-size: 2rem;
+            }
+            
+            .welcome-content p {
+                font-size: 1.2rem;
+            }
+            
+            .profile h1 {
+                font-size: 2rem;
+            }
+            
+            .profile p {
+                font-size: 1rem;
+            }
+            
+            .link-item {
+                padding: 1rem 1.2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1>مرحباً بكم</h1>
+            <p>أهلاً وسهلاً بك في موقع عبدالله بدران</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="profile">
+            <div class="profile-image">
+                <img src="https://ugc.production.linktr.ee/3d51a6ad-3a91-4a0c-b8c1-84629ab3c51d_1001040465.webp?io=true&size=avatar-v3_0" alt="Abdallah Badran" onerror="this.src='https://via.placeholder.com/120/667eea/ffffff?text=AB'">
+            </div>
+            <h1>Abdallah Badran</h1>
+            <p>منشئ محتوى كرة القدم والألعاب ⚽️ 🎮<br>
+            +10k متابع 📌 مهندس مدني ☀️👷🏻<br>
+            أردني 🇯🇴 يعيش في الإمارات 🇦🇪 📍</p>
+        </div>
+
+        <div class="links">
+            <a href="mailto:Badran4ads@gmail.com" class="link-item fade-in" style="--delay: 0.1s">
+                <div class="link-icon email">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <span class="link-text">للإعلانات - Email</span>
+            </a>
+
+            <a href="https://youtube.com/@itzbadran?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.2s">
+                <div class="link-icon youtube">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <span class="link-text">يوتيوب - YouTube</span>
+            </a>
+
+            <a href="https://www.instagram.com/itzbadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.3s">
+                <div class="link-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <span class="link-text">انستغرام - Instagram</span>
+            </a>
+
+            <a href="https://www.tiktok.com/@itzbadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.4s">
+                <div class="link-icon tiktok">
+                    <i class="fab fa-tiktok"></i>
+                </div>
+                <span class="link-text">تيكتوك - TikTok</span>
+            </a>
+
+            <a href="https://www.twitch.tv/itzbadran/" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.5s">
+                <div class="link-icon twitch">
+                    <i class="fab fa-twitch"></i>
+                </div>
+                <span class="link-text">التويتش - Twitch</span>
+            </a>
+
+            <a href="https://x.com/ItzBadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.6s">
+                <div class="link-icon twitter">
+                    <i class="fab fa-x-twitter"></i>
+                </div>
+                <span class="link-text">إكس - X (Twitter)</span>
+            </a>
+
+            <a href="https://www.snapchat.com/add/abdullabadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.7s">
+                <div class="link-icon snapchat">
+                    <i class="fab fa-snapchat"></i>
+                </div>
+                <span class="link-text">سنابي - Snapchat</span>
+            </a>
+
+            <a href="https://facebook.com/itzbadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.8s">
+                <div class="link-icon facebook">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <span class="link-text">الفيسبوك - Facebook</span>
+            </a>
+
+            <a href="https://www.threads.net/@itzbadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 0.9s">
+                <div class="link-icon threads">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <span class="link-text">ثريدز - Threads</span>
+            </a>
+
+            <a href="https://www.g2a.com/r/badran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 1.0s">
+                <div class="link-icon g2a">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <span class="link-text">أرخص الألعاب - G2A</span>
+            </a>
+
+            <a href="https://paypal.me/AbdullaBadran" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 1.1s">
+                <div class="link-icon paypal">
+                    <i class="fab fa-paypal"></i>
+                </div>
+                <span class="link-text">رابط الدعم ❤️ - PayPal</span>
+            </a>
+
+            <a href="mailto:Badran4topics@gmail.com" class="link-item fade-in" style="--delay: 1.2s">
+                <div class="link-icon email">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <span class="link-text">اقترح موضوع - Suggest Topic</span>
+            </a>
+
+            <a href="https://redzapp.app.link/261e0060-919a-4685-ba9a-b9b48297ec91" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 1.3s">
+                <div class="link-icon redz">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <span class="link-text">ريدز - Redz App</span>
+            </a>
+
+            <a href="http://onelink.to/96hza8" target="_blank" rel="noopener noreferrer" class="link-item fade-in" style="--delay: 1.4s">
+                <div class="link-icon baaz">
+                    <i class="fas fa-link"></i>
+                </div>
+                <span class="link-text">بااز - Baaz</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Welcome Screen Animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('welcomeScreen').classList.add('hidden');
+                
+                // Start fade-in animations for links
+                setTimeout(function() {
+                    const fadeElements = document.querySelectorAll('.fade-in');
+                    fadeElements.forEach(function(element, index) {
+                        setTimeout(function() {
+                            element.classList.add('visible');
+                        }, index * 100);
+                    });
+                }, 500);
+            }, 3000);
+        });
+
+        // Scroll animations
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(function(element) {
+                if (isElementInViewport(element)) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollAnimations);
+        
+        // Add click animation effects
+        document.querySelectorAll('.link-item').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = (e.clientX - this.offsetLeft - 25) + 'px';
+                ripple.style.top = (e.clientY - this.offsetTop - 25) + 'px';
+                ripple.style.width = '50px';
+                ripple.style.height = '50px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(function() {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Dynamic CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add hover sound effect (optional - uncomment if you want sound)
+        /*
+        const hoverSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBzd+0fPTgjEGHWq+8+OZSA0PVqzn77BdGAg+ltryxnkpBSl+1PDah0AQC0em5O2vaBUIQ5ve8dKOSg0QUqfk7rsrBih+z+zdkTYNFGKz59xQAgWC0vHUhjMIGWh77N2qUwgJSjvH0gABWAIHBgAA');
+        document.querySelectorAll('.link-item').forEach(function(link) {
+            link.addEventListener('mouseenter', function() {
+                hoverSound.currentTime = 0;
+                hoverSound.play().catch(function() {});
+            });
+        });
+        */
+    </script>
+</body>
+</html>
